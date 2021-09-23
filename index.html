@@ -29,7 +29,28 @@
         <h2 class="mb-md">Reviews</h2>
 
         <ul id="reviews" class="reviews"></ul>
+        
+        <dialog id="review-modal" class="review-modal">
+            <div id="review-modal-wrapper" class="review-modal-wrapper">
+                <form class="review-form">
+                    <h2 class="h1">What"s your rating ?</h2>
+                    <label class="review-form__label" for="new-review-rating">Rating</label>
+                    <div class="review-form__stars">
+                        <button class="review-form__star" data-rating="1">1 star</button>
+                        <button class="review-form__star" data-rating="2">2 stars</button>
+                        <button class="review-form__star" data-rating="3">3 stars</button>
+                        <button class="review-form__star" data-rating="4">4 stars</button>
+                        <button class="review-form__star" data-rating="5">5 stars</button>
+                    </div>
+                    <input type="number" id="new-review-rating" class="review-form__rating">
 
+                    <label class="review-form__label" for="new-review-comment">Review</label>
+                    <textarea id="new-review-comment" cols="30" rows="3" placeholder="Start typing..."></textarea>
+
+                    <button id="submit-review">Submit review</button>
+                </form>
+            </div>
+        </dialog>
     </div>
 </body>
 </html>

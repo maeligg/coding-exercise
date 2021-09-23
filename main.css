@@ -111,3 +111,51 @@ hr {
     color: var(--black);
 }
 
+.review-modal {
+    border: none;
+    border-radius: 20px;
+}
+
+.review-modal-wrapper {
+    padding: 50px;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.review-form > * + * {
+    margin-top: 40px;
+}
+
+.review-form__stars {
+    display: flex;
+}
+
+.review-form__star {
+    text-indent: -9999px;
+    border: none;
+    background: transparent;
+    background-image: url('./assets/img/star-empty.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.review-form__stars:hover .review-form__star, .review-form__star-full {
+    background-image: url('./assets/img/star-full.svg');
+}
+
+.review-form__star:hover ~ .review-form__star {
+    background-image: url('./assets/img/star-empty.svg');
+}
+
+.review-form__label {
+    font-size: 24px;
+}
+
+.review-form__rating {
+    display: none;
+}
