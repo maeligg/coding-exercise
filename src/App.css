@@ -31,9 +31,16 @@
 }
 
 .star {
-  width: 30px;
+  width: 15px;
   height: 30px;
-  margin: 0 5px;
+}
+
+.star:nth-child(odd) {
+  transform: scaleX(-1);
+}
+
+.star:nth-child(even) {
+  margin-right: 10px;
 }
 
 .average-rating {
@@ -89,21 +96,32 @@
 }
 
 .review-form__star {
+  width: 15px;
+  height: 30px;
+  padding: 0;
   text-indent: -9999px;
   border: none;
   background: transparent;
-  background-image: url('./assets/img/star-empty.svg');
+  background-image: url('./assets/img/half-star-empty.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
+.review-form__star:nth-child(odd) {
+  transform: scaleX(-1);
+}
+
+.review-form__star:nth-child(even) {
+  margin-right: 10px;
+}
+
 .review-form__stars:hover .review-form__star, .review-form__star-full {
-  background-image: url('./assets/img/star-full.svg');
+  background-image: url('./assets/img/half-star-full.svg');
 }
 
 .review-form__star:hover ~ .review-form__star {
-  background-image: url('./assets/img/star-empty.svg');
+  background-image: url('./assets/img/half-star-empty.svg');
 }
 
 .review-form__label {

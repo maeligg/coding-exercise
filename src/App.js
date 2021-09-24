@@ -39,7 +39,7 @@ function App() {
 
       setTitle(data.title);
       setReviews(data.reviews);
-      setAverageRating(data.reviews.map(review => review.rating).reduce((prev, curr) => prev + curr) / data.reviews.length)
+      setAverageRating((data.reviews.map(review => review.rating).reduce((prev, curr) => prev + curr) / data.reviews.length).toFixed(1))
     });
 
     return unsub
@@ -53,7 +53,7 @@ function App() {
             <div className="average-wrapper">
                 <span id="average-rating" className="average-rating">{averageRating}</span>
                 <div id="average-stars">
-                  { [...Array(5)].map((x, i) => <Star key={i} full={i < averageRating} />) }
+                  { [...Array(10)].map((x, i) => <Star key={i} full={i < averageRating * 2} />) }
                 </div>
                 <button id="add-review" className="review-button" onClick={() => setModalIsOpen(true)}>Add review</button>
             </div>
@@ -66,7 +66,7 @@ function App() {
         <ul id="reviews" className="reviews">
           {reviews.map((review, i) => (
             <li key={i} className="review-item">
-              { [...Array(5)].map((x, i) => <Star key={i} full={i < review.rating} />) }
+              { [...Array(10)].map((x, i) => <Star key={i} full={i < review.rating * 2} />) }
               <span className="review-text">
                 <span className="review-rating">{review.rating}</span>{`, ${review.comment}`}
               </span>
@@ -83,11 +83,16 @@ function App() {
                       <h2 className="h1">What's your rating ?</h2>
                       <label className="review-form__label" htmlFor="new-review-rating">Rating</label>
                       <div className="review-form__stars">
-                          <button type="button" className={`review-form__star ${rating >= 1 && 'review-form__star-full'}`} onClick={() => setRating(1)}>1 star</button>
-                          <button type="button" className={`review-form__star ${rating >= 2 && 'review-form__star-full'}`} onClick={() => setRating(2)}>2 stars</button>
-                          <button type="button" className={`review-form__star ${rating >= 3 && 'review-form__star-full'}`} onClick={() => setRating(3)}>3 stars</button>
-                          <button type="button" className={`review-form__star ${rating >= 4 && 'review-form__star-full'}`} onClick={() => setRating(4)}>4 stars</button>
-                          <button type="button" className={`review-form__star ${rating >= 5 && 'review-form__star-full'}`} onClick={() => setRating(5)}>5 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= .5 && 'review-form__star-full'}`} onClick={() => setRating(.5)}>0.5 star</button>
+                        <button type="button" className={`review-form__star ${rating >= 1 && 'review-form__star-full'}`} onClick={() => setRating(1)}>1 star</button>
+                        <button type="button" className={`review-form__star ${rating >= 1.5 && 'review-form__star-full'}`} onClick={() => setRating(1.5)}>1.5 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 2 && 'review-form__star-full'}`} onClick={() => setRating(2)}>2 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 2.5 && 'review-form__star-full'}`} onClick={() => setRating(2.5)}>2.5 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 3 && 'review-form__star-full'}`} onClick={() => setRating(3)}>3 star</button>
+                        <button type="button" className={`review-form__star ${rating >= 3.5 && 'review-form__star-full'}`} onClick={() => setRating(3.5)}>3.5 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 4 && 'review-form__star-full'}`} onClick={() => setRating(4)}>4 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 4.5 && 'review-form__star-full'}`} onClick={() => setRating(4.5)}>4.5 stars</button>
+                        <button type="button" className={`review-form__star ${rating >= 5 && 'review-form__star-full'}`} onClick={() => setRating(5)}>5 stars</button>
                       </div>
                       <input type="number" id="new-review-rating" className="review-form__rating" readOnly value={rating} />
 
