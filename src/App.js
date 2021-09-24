@@ -43,7 +43,7 @@ function App() {
     });
 
     return unsub
-  }, [])
+  }, [db])
 
   return (
     <div className="container">
