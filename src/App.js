@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Star from './Star';
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { getFirestore, doc, updateDoc, arrayUnion, onSnapshot } from "firebase/firestore";
 
 // These tokens are safe to store in the frontend
 initializeApp({
@@ -22,15 +22,6 @@ function App() {
   const db = getFirestore();
   const productRef = doc(db, 'products', 'the-minimalist-entrepreneur'); // Here we select the specific product we want to handle, but the DB is built in a way that you can add as many different products as you want
 
-  const getData = async () => {
-    const productSnapshot = await getDoc(productRef);
-    const data = productSnapshot.data();
-
-    setTitle(data.title);
-    setReviews(data.reviews);
-    setAverageRating(data.reviews.map(review => review.rating).reduce((prev, curr) => prev + curr) / data.reviews.length)
-  }
-
   const submitReview = async () => {
     await updateDoc(productRef, {
       reviews: arrayUnion({
@@ -39,13 +30,19 @@ function App() {
       })
     });
 
-    // Refresh the data so we immediately see our new review
-    getData();
     setModalIsOpen(false);
   }
 
   useEffect(() => {
-    getData();
+    const unsub = onSnapshot(doc(db, "products", "the-minimalist-entrepreneur"), (doc) => {
+      const data = doc.data();
+
+      setTitle(data.title);
+      setReviews(data.reviews);
+      setAverageRating(data.reviews.map(review => review.rating).reduce((prev, curr) => prev + curr) / data.reviews.length)
+    });
+
+    return unsub
   }, [])
 
   return (
